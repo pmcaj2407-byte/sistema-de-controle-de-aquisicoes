@@ -33,7 +33,4 @@ public abstract class Usuario {
     public void setTipo(Tipo tipo) {
         this.tipo = tipo;
     }
-
-
-    
 }
