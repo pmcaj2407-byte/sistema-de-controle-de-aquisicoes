@@ -2,6 +2,7 @@ public abstract class Usuario {
 
     private int id; 
     private String nome; 
+<<<<<<< HEAD
     private Tipo tipo;
     private Departamento departamento;
 
@@ -11,8 +12,25 @@ public abstract class Usuario {
         this.nome = nome; 
         this.tipo = tipo;
         this.departamento = departamento;
+=======
+    private TipoUsuario tipo;
+    private Departamento dep;
+
+    public Usuario(int id, String nome, TipoUsuario tipo, Departamento dep) {
+        this.id=id;
+        this.nome = nome; 
+        this.tipo = tipo;
+        this.dep = dep;
+>>>>>>> eef789cddc921551b840dafc844462581fcb5124
 
     }
+    public Departamento getDep() {
+        return dep;
+    }
+    public void setDep(Departamento dep) {
+        this.dep = dep;
+    }
+    
     public int getId() {
         return id;
     }
@@ -28,11 +46,11 @@ public abstract class Usuario {
         this.nome = nome;
     }
 
-    public Tipo getTipo() {
+    public TipoUsuario getTipo() {
         return tipo;
     }
 
-    public void setTipo(Tipo tipo) {
+    public void setTipo(TipoUsuario tipo) {
         this.tipo = tipo;
     }
 
