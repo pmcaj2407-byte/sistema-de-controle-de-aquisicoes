@@ -2,14 +2,14 @@ public abstract class Usuario {
 
     private int id; 
     private String nome; 
-    private TipoUsuario tipo;
+    private Tipo tipo;
     private Departamento dep;
 
-    public Usuario(int id, String nome, TipoUsuario tipo, Departamento dep) {
+    public Usuario(int id, String nome, Tipo tipo, Departamento dep) {
         this.id=id;
         this.nome = nome; 
         this.tipo = tipo;
-        this.dep = dep;
+        this.dep=dep;
 
     }
     public Departamento getDep() {
@@ -34,11 +34,11 @@ public abstract class Usuario {
         this.nome = nome;
     }
 
-    public TipoUsuario getTipo() {
+    public Tipo getTipo() {
         return tipo;
     }
 
-    public void setTipo(TipoUsuario tipo) {
+    public void setTipo(Tipo tipo) {
         this.tipo = tipo;
     }
 }

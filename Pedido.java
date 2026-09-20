@@ -1,15 +1,48 @@
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
+
 public class Pedido {
-    
-    public  enum StatusPedido { ABERTO, APROVADO , REPROVADO};
+
+    public enum StatusPedido { ABERTO, APROVADO, REPROVADO }
+
     private StatusPedido statusP;
     private Usuario func;
     private Departamento dep;
-    private String dataI;
-    private String dataF;
-    private List<Item> itens;
     
+    // Substituímos String por LocalDate
+    private LocalDate dataI;
+    private LocalDate dataF;
+    
+    private List<Item> itens;
+
+    // Construtor: a dataI pode ser informada ou pegar automaticamente a data atual (LocalDate.now())
+    public Pedido(Usuario func, LocalDate dataI) {
+        this.func = func;
+        this.dep = func.getDep(); // Pega direto do usuário
+        this.dataI = dataI;
+        this.dataF = null; // Inicia sem data final
+        this.statusP = StatusPedido.ABERTO;
+        this.itens = new ArrayList<>();
+    }
+
+    // Método para finalizar/fechar o pedido e registrar a data final
+    public void finalizarPedido(StatusPedido novoStatus, LocalDate dataF) {
+        this.statusP = novoStatus;
+        this.dataF = dataF;
+    }
+
+    // Método para calcular a quantidade de dias que o pedido levou para ser concluído
+    public long getTempoConclusaoEmDias() {
+        if (this.dataF == null) {
+            // Se ainda não foi finalizado, calcula a diferença em relação à data de hoje
+            return ChronoUnit.DAYS.between(this.dataI, LocalDate.now());
+        }
+        return ChronoUnit.DAYS.between(this.dataI, this.dataF);
+    }
+
+    // Getters e Setters
     public StatusPedido getStatusP() {
         return statusP;
     }
@@ -22,11 +55,11 @@ public class Pedido {
         return dep;
     }
 
-    public String getDataI() {
+    public LocalDate getDataI() {
         return dataI;
     }
 
-    public String getDataF() {
+    public LocalDate getDataF() {
         return dataF;
     }
 
@@ -34,24 +67,14 @@ public class Pedido {
         return itens;
     }
 
-    public Pedido(Usuario func,Departamento dep,String dataI ) {
-        this.func = func;
-        this.dep = dep;
-        this.dataI = dataI;
-        this.dataF = null;
-        this.statusP = StatusPedido.ABERTO; // todo pedido inicia em aberto
-        this.itens = new ArrayList<>();
-    }
-
-        // adicionar um novo item a lista
-    public void adicionarItem (Item item){
+    public void adicionarItem(Item item) {
         itens.add(item);
     }
-    public double getValorTotal (){
-        // valor total de todos os itens do Pedido
+
+    public double getValorTotal() {
         double valor = 0;
-        for(Item valores : itens){
-            valor+= valores.getValorTotal();
+        for (Item item : itens) {
+            valor += item.getValorTotal();
         }
         return valor;
     }
