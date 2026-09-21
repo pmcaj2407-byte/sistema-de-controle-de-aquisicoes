@@ -1,4 +1,4 @@
-public enum Tipo {
+public enum TipoUsuario {
     FUNCIONARIO,
     ADMINISTRADOR;
 }
