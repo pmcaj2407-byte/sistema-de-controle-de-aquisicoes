@@ -13,7 +13,7 @@ public class TesteThiago {
             throw new AssertionError("Devem existir pelo menos 5 departamentos");
         }
         long funcionarios = DadosIniciais.carregarUsuarios().stream()
-                .filter(usuario -> usuario.getTipo() == Tipo.FUNCIONARIO)
+                .filter(usuario -> usuario.getTipo() == TipoUsuario.FUNCIONARIO)
                 .count();
         if (funcionarios < 15) {
             throw new AssertionError("Devem existir pelo menos 15 funcionarios");

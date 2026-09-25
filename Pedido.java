@@ -3,7 +3,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Pedido {
+public class Pedido implements PedidoAvaliavel {
 
     public enum StatusPedido { ABERTO, APROVADO, REPROVADO }
 
@@ -77,5 +77,43 @@ public class Pedido {
             valor += item.getValorTotal();
         }
         return valor;
+    }
+
+    @Override
+    public Usuario getSolicitante() {
+        return func;
+    }
+
+    @Override
+    public boolean estaAberto() {
+        return statusP == StatusPedido.ABERTO;
+    }
+
+    @Override
+    public boolean estaAprovado() {
+        return statusP == StatusPedido.APROVADO;
+    }
+
+    @Override
+    public boolean possuiDataConclusao() {
+        return dataF != null;
+    }
+
+    @Override
+    public void aprovar() {
+        finalizarPedido(StatusPedido.APROVADO, null);
+    }
+
+    @Override
+    public void reprovar() {
+        finalizarPedido(StatusPedido.REPROVADO, null);
+    }
+
+    @Override
+    public void concluir(LocalDate dataConclusao) {
+        if (!estaAprovado()) {
+            throw new IllegalStateException("Somente pedidos aprovados podem ser concluidos");
+        }
+        finalizarPedido(StatusPedido.APROVADO, dataConclusao);
     }
 }

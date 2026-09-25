@@ -32,7 +32,7 @@ public class ServicoAprovacao {
     }
 
     private void validarAdministrador(Usuario operador) {
-        if (operador == null || operador.getTipo() != Tipo.ADMINISTRADOR) {
+        if (operador == null || operador.getTipo() != TipoUsuario.ADMINISTRADOR) {
             throw new SecurityException("Somente administradores podem avaliar pedidos");
         }
     }
