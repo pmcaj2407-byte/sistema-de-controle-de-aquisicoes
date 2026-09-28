@@ -1,11 +1,4 @@
-/**
- * Exceção de domínio lançada quando uma tentativa de cadastrar ou aprovar
- * um pedido de aquisição excede o limite financeiro teto estabelecido
- * para o departamento solicitante.
- *
- * @author EnzoTesta
- * @version 1.0
- */
+
 public class LimiteDepartamentoExcedidoException extends DominioException {
 
     private static final long serialVersionUID = 1L;
@@ -15,13 +8,6 @@ public class LimiteDepartamentoExcedidoException extends DominioException {
     private final double limiteMaximo;
     private final double excessoCalculado;
 
-    /**
-     * Construtor completo para registrar os detalhes orçamentários do departamento.
-     *
-     * @param nomeDepartamento Nome do departamento associado ao pedido.
-     * @param valorSolicitado   Valor monetário total da requisição.
-     * @param limiteMaximo      Limite orçamentário teto configurado no sistema.
-     */
     public LimiteDepartamentoExcedidoException(String nomeDepartamento, double valorSolicitado, double limiteMaximo) {
         super(montarMensagemDetalhada(nomeDepartamento, valorSolicitado, limiteMaximo));
 
@@ -31,9 +17,7 @@ public class LimiteDepartamentoExcedidoException extends DominioException {
         this.excessoCalculado = calcularExcesso(valorSolicitado, limiteMaximo);
     }
 
-    /**
-     * Monta uma mensagem amigável e explicativa sobre o estouro de orçamento.
-     */
+
     private static String montarMensagemDetalhada(String departamento, double solicitado, double limite) {
         double diferenca = solicitado - limite;
         return String.format(
@@ -45,9 +29,6 @@ public class LimiteDepartamentoExcedidoException extends DominioException {
         );
     }
 
-    /**
-     * Calcula a diferença monetária acima do limite permitido.
-     */
     private static double calcularExcesso(double valor, double limite) {
         if (valor > limite) {
             return valor - limite;
@@ -55,29 +36,17 @@ public class LimiteDepartamentoExcedidoException extends DominioException {
         return 0.0;
     }
 
-    /**
-     * Obtém o nome do departamento envolvido na exceção.
-     *
-     * @return String com o nome do departamento.
-     */
+
     public String getNomeDepartamento() {
         return nomeDepartamento;
     }
 
-    /**
-     * Obtém o valor total que foi solicitado.
-     *
-     * @return double do valor solicitado.
-     */
+
     public double getValorSolicitado() {
         return valorSolicitado;
     }
 
-    /**
-     * Obtém o teto máximo orçamentário do departamento.
-     *
-     * @return double do limite configurado.
-     */
+
     public double getLimiteMaximo() {
         return limiteMaximo;
     }
