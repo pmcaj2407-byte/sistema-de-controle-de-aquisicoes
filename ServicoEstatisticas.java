@@ -8,7 +8,6 @@ public class ServicoEstatisticas {
         this.pedidos = pedidos;
     }
 
-    // quantidade de pedidos por status
     public long[] totalPorStatus() {
 
         long[] totais = new long[Pedido.StatusPedido.values().length];
@@ -20,7 +19,6 @@ public class ServicoEstatisticas {
         return totais;
     }
 
-    // percentual por status
     public double[] percentualPorStatus() {
 
         double[] percentuais = new double[Pedido.StatusPedido.values().length];
@@ -41,7 +39,6 @@ public class ServicoEstatisticas {
         return percentuais;
     }
 
-    // quantidade de pedidos dos últimos 30 dias
     public int quantidadeUltimos30Dias() {
 
         int cont = 0;
@@ -62,7 +59,6 @@ public class ServicoEstatisticas {
         return cont;
     }
 
-    // valor médio dos pedidos dos últimos 30 dias
     public double valorMedioUltimos30Dias() {
 
         double soma = 0;
@@ -89,7 +85,6 @@ public class ServicoEstatisticas {
         return soma / cont;
     }
 
-    // pedido aberto de maior valor
     public Pedido pedidoAbertoMaiorValor() {
 
         Pedido maior = null;
